@@ -5,6 +5,8 @@ import {MatDialogModule, MatDialog,MatDialogConfig} from '@angular/material/dial
 import { OrderItemComponent } from '../order-item/order-item.component';
 import { Customer } from 'src/app/shared/customer.model';
 import { CustomerService } from 'src/app/shared/customer.service';
+import { ToastrService } from 'ngx-toastr';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -15,7 +17,11 @@ export class OrderComponent implements OnInit {
   form:NgForm;
   getAllCustomer:Customer[];
   isValid:boolean=true;
-  constructor(private service:OrderService,private dialog:MatDialog,private customerService:CustomerService) { }
+  constructor(private service:OrderService,
+    private dialog:MatDialog,
+    private customerService:CustomerService,
+    private toastr:ToastrService,
+    private route:Router) { }
 
   ngOnInit() {
 
@@ -64,7 +70,9 @@ export class OrderComponent implements OnInit {
    if(this.validateForm()){
      this.service.postAllOrder().subscribe(res=>{
        this.reset();
-     })
+       this.toastr.success("Successfully Orders Done","Restaurent App.");
+this.route.navigate(["/orders"]);   
+ })
    }
   }
   validateForm(){

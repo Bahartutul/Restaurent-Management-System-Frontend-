@@ -14,7 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomerService } from './shared/customer.service';
-
+import { ToastrModule } from 'ngx-toastr';
+import { OrderItemService } from './shared/order-item.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,10 +30,11 @@ import { CustomerService } from './shared/customer.service';
     MatSliderModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   entryComponents:[OrderItemComponent],
-  providers: [OrderService,CustomerService],
+  providers: [OrderService,CustomerService,OrderItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
