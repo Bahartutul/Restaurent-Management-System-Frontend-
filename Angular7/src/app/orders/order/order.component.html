@@ -1,0 +1,96 @@
+<form #form="ngForm" autocomplete="off" *ngIf="service.formData" (submit)="onSubmit(form)">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+          <label>Order No.:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">#</div>
+            </div>
+            <input  name="orderNo" #orderNo="ngModel" [(ngModel)]="service.formData.orderNo" placeholder="Order No." class="form-control" readonly>
+
+          </div>
+
+      </div>
+      <div class="form-group">
+          <label>Customer:</label>
+          <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">#</div>
+              </div>
+              <select  name="CustomerId" #CustomerId="ngModel" [(ngModel)]="service.formData.CustomerId" class="form-control"
+              [class.is-invalid]="!isValid && service.formData.CustomerId==0">
+                  <option value="0">--select Customer--</option>  
+                  <option *ngFor="let cus of getAllCustomer" value="{{cus.CustomerId}}">{{cus.Name}}</option>
+                  </select>
+            </div>
+        
+          
+      </div>
+      
+     
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Payment Method:</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">#</div>
+                </div>
+                <select  name="pmMethod" #pmMethod="ngModel" [(ngModel)]="service.formData.pmMethod" class="form-control"
+                [class.is-invalid]="!isValid && service.formData.pmMethod==''">
+                    <option value="">--Select PayMethod--</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Card">Card</option>
+                    </select>
+              </div>
+            
+        </div>
+        <div class="form-group">
+            <label>Grand Total:</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">#</div>
+                </div>
+                <input  name="gTotal" #gTotal="ngModel" [(ngModel)]="service.formData.gTotal" placeholder="Grant Total" class="form-control" readonly>
+
+              </div>
+           
+            
+        </div>
+  </div>
+  
+  </div>
+
+  <div class="form-group">
+      <button type="submit" class="btn btn-dark form-control" ><i class="fa fa-database"> Submit</i></button>
+    </div>
+    <table class="table table-borderless offset-md-1">
+      <thead>
+        <tr >
+          <th>Food</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th><button type="button" class="btn btn-success" (click)="AddOrEditOrderItem(null,service.formData.orderId)"><i class="fa fa-plus"></i>Add</button></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="service.orderItems.length==0" >
+            <td class="text-center font-italic" colspan="4" [class.text-danger]="!isValid">
+                No food item selected for this order
+            </td>
+        </tr>
+        <tr *ngFor="let oi of service.orderItems; let i=index;">
+            <td>{{oi.Name}}</td>
+            <td>{{oi.Price}}</td>
+            <td>{{oi.Quantity}}</td>
+            <td>{{oi.Total}}</td>
+            <td>
+                <button type="button" class="btn btn-info" (click)="AddOrEditOrderItem(i,service.formData.orderId)"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-danger ml-1" (click)="deleteOrderItem(oi.orderId,i)"><i class="fa fa-trash"></i></button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+</form>
