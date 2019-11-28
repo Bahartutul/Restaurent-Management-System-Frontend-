@@ -1,4 +1,5 @@
 <form #form="ngForm" autocomplete="off" *ngIf="service.formData" (submit)="onSubmit(form)">
+  <input type="hidden" name="OrderId" #OrderId="ngModel" [(ngModel)]="service.formData.OrderId">
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
@@ -7,7 +8,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text">#</div>
             </div>
-            <input  name="orderNo" #orderNo="ngModel" [(ngModel)]="service.formData.orderNo" placeholder="Order No." class="form-control" readonly>
+            <input  name="OrderNo" #OrderNo="ngModel" [(ngModel)]="service.formData.OrderNo" placeholder="Order No." class="form-control" readonly>
 
           </div>
 
@@ -37,7 +38,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">#</div>
                 </div>
-                <select  name="pmMethod" #pmMethod="ngModel" [(ngModel)]="service.formData.pmMethod" class="form-control"
+                <select  name="PmMethod" #PmMethod="ngModel" [(ngModel)]="service.formData.PmMethod" class="form-control"
                 [class.is-invalid]="!isValid && service.formData.pmMethod==''">
                     <option value="">--Select PayMethod--</option>
                     <option value="Cash">Cash</option>
@@ -52,7 +53,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">#</div>
                 </div>
-                <input  name="gTotal" #gTotal="ngModel" [(ngModel)]="service.formData.gTotal" placeholder="Grant Total" class="form-control" readonly>
+                <input  name="GTotal" #GTotal="ngModel" [(ngModel)]="service.formData.GTotal" placeholder="Grant Total" class="form-control" readonly>
 
               </div>
            
@@ -62,9 +63,7 @@
   
   </div>
 
-  <div class="form-group">
-      <button type="submit" class="btn btn-dark form-control" ><i class="fa fa-database"> Submit</i></button>
-    </div>
+
     <table class="table table-borderless offset-md-1">
       <thead>
         <tr >
@@ -93,4 +92,10 @@
         </tr>
       </tbody>
     </table>
+    
+      <button type="submit" class="btn btn-dark " ><i class="fa fa-database"> Submit</i></button>
+   
+    <button type="button" class="btn btn-outline-dark ml-1" routerLink="/orders"><i class="fa fa-table"></i>View Details</button>
+
 </form>
+

@@ -21,4 +21,7 @@ orderItems:OrderItem[];
     }
    return this.http.post(environment.apiUrl+"/Orders",body);
   }
+  getOrderById(id:number):any{
+  return this.http.get(environment.apiUrl+"/Orders/"+id).toPromise();
+  }
 }

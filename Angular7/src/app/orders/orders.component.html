@@ -1,20 +1,19 @@
 <table class="table table-boarderless">
   <thead>
     <tr>
-      <th>Order Id</th>
-      <th>Order No</th>
+      <th>#Order No</th>
       <th>Customer Name</th>
       <th>Grand Total</th>
       <th>Payment Method</th>
+      <th><button type="button" class="btn btn-outline-success" routerLink="/order"><i class="fa fa-plus-square"></i>Create New</button></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let oi of OrdersItem">
-      <td>{{oi.OrderId}}</td>
-      <td>{{oi.OrderNo}}</td>
-      <td>{{oi.CustomaeName}}</td>
-      <td>{{oi.GTotal}}</td>
-      <td>{{oi.PmMethod}}</td>
+      <td (click)="uddateOrder(oi.OrderId)">{{oi.OrderNo}}</td>
+      <td (click)="uddateOrder(oi.OrderId)">{{oi.CustomaeName}}</td>
+      <td (click)="uddateOrder(oi.OrderId)">{{oi.GTotal}}</td>
+      <td (click)="uddateOrder(oi.OrderId)">{{oi.PmMethod}}</td>
     </tr>
   </tbody>
 </table>

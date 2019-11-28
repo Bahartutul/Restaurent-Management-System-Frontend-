@@ -6,7 +6,7 @@ import { OrderItemComponent } from '../order-item/order-item.component';
 import { Customer } from 'src/app/shared/customer.model';
 import { CustomerService } from 'src/app/shared/customer.service';
 import { ToastrService } from 'ngx-toastr';
-import { Route, Router } from '@angular/router';
+import { Route, Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -21,10 +21,19 @@ export class OrderComponent implements OnInit {
     private dialog:MatDialog,
     private customerService:CustomerService,
     private toastr:ToastrService,
-    private route:Router) { }
+    private route:Router,
+    private currentRoute:ActivatedRoute) { }
 
   ngOnInit() {
-
+     let orderId=this.currentRoute.snapshot.paramMap.get('id');
+     if(orderId==null){
+       this.reset();
+     }else{
+       this.service.getOrderById(parseInt(orderId)).then(res=>{
+         this.service.formData=res.order,
+         this.service.orderItems=res.orders
+       })
+     }
      this.reset();
      this.getAllCus();
 
@@ -34,12 +43,13 @@ export class OrderComponent implements OnInit {
     if(this.form=null)
      this.form.resetForm();
     this.service.formData={
-      orderId:null,
-      orderNo:Math.floor(10000+(Math.random()*90000)).toString(),
+      OrderId:null,
+      OrderNo:Math.floor(10000+(Math.random()*90000)).toString(),
       CustomerId:0,
-      gTotal:0,
-      pmMethod:'',
-      Name:''
+      GTotal:0,
+      PmMethod:'',
+      Name:'',
+      DeletedItems:''
     };
     this.service.orderItems=[];
   }
@@ -52,15 +62,19 @@ export class OrderComponent implements OnInit {
     dialogConf.data={orderIndex,OrderId}
     this.dialog.open(OrderItemComponent,dialogConf).afterClosed().subscribe(res=>this.updateGrandTotal());
   }
-  deleteOrderItem(orderId:number,i:number){
+  deleteOrderItem(orderItemId:number,i:number){
+   if(orderItemId!=null){
+       this.service.formData.DeletedItems += orderItemId+",";
+      }
     this.service.orderItems.splice(i,1);
+  
     this. updateGrandTotal();
   }
   updateGrandTotal(){
-    this.service.formData.gTotal= this.service.orderItems.reduce((prev,curr)=>{
+    this.service.formData.GTotal= this.service.orderItems.reduce((prev,curr)=>{
      return prev+curr.Total;
     },0)
-    this.service.formData.gTotal=parseFloat(this.service.formData.gTotal.toFixed(2));
+    this.service.formData.GTotal=parseFloat(this.service.formData.GTotal.toFixed(2));
   }
 
   getAllCus(){
@@ -83,7 +97,7 @@ this.route.navigate(["/orders"]);
     else if(this.service.orderItems.length<1){
       this.isValid=false;
     }
-    else if(this.service.formData.pmMethod==''){
+    else if(this.service.formData.PmMethod==''){
       this.isValid=false;
     }
     return this.isValid;
