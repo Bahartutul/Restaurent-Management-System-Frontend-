@@ -7,6 +7,8 @@ import { Customer } from 'src/app/shared/customer.model';
 import { CustomerService } from 'src/app/shared/customer.service';
 import { ToastrService } from 'ngx-toastr';
 import { Route, Router, ActivatedRoute } from '@angular/router';
+import { config } from 'rxjs';
+import { ItemComponent } from '../item/item.component';
 
 @Component({
   selector: 'app-order',
@@ -101,5 +103,13 @@ this.route.navigate(["/orders"]);
       this.isValid=false;
     }
     return this.isValid;
+  }
+
+  AddFoodItem(){
+    var Config=new MatDialogConfig();
+    Config.autoFocus=true;
+    Config.disableClose=true;
+    Config.data=null;
+    this.dialog.open(ItemComponent,Config);
   }
 }

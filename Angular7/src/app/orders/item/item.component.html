@@ -1,0 +1,20 @@
+<div class="display-4 text-center">Add Food Item</div>
+<hr>
+<form #form='ngForm' autocomplete="off" *ngIf="service.formData" (submit)="AddItem(form)">
+    <input type="hidden" name="ItemId" #ItemId="ngModel" [(ngModel)]="service.formData.ItemId">
+    
+    <div class="form-group">
+    <label>Food Name</label>
+    <input type="text" name="Name" #Name="ngModel" [(ngModel)]="service.formData.Name" class="form-control" [class.is-invalid]="!isValid && service.formData.Name==''">
+    </div>
+    
+    <div class="form-group">
+            <label>Price</label>
+            <input type="text" name="Price" #Price="ngModel" [(ngModel)]="service.formData.Price" class="form-control" [class.is-invalid]="!isValid && service.formData.Price==0">
+            </div>
+<div class="form-group">
+<button type="submit" class="btn btn-dark"><i class="fa fa-plus-square">Add</i></button>
+<button type="button" class="btn btn-outline-dark ml-1" routerLink="/itemDeatails" [mat-dialog-close]><i class="fa fa-table">View Details</i></button>
+<button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close">Close</i></button>
+</div>
+</form>
