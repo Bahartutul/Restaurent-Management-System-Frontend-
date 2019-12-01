@@ -15,6 +15,10 @@ const routes: Routes = [
   ]},
   {path:'item', component:ItemComponent},
   {path:'itemDeatails', component:ItemDetailsComponent}
+  // {path:'itemDetails',children:[
+  //   {path:'',component:ItemDetailsComponent},
+  //   {path:'edit/:id',component:ItemDetailsComponent}
+  // ]}
 
 ];
 @NgModule({

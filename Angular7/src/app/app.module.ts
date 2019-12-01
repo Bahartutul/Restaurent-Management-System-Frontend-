@@ -19,6 +19,7 @@ import { OrderItemService } from './shared/order-item.service';
 import { ItemComponent } from './orders/item/item.component';
 import { ItemService } from './shared/item.service';
 import { ItemDetailsComponent } from './orders/item-details/item-details.component';
+import { MatPaginator, MatPaginatorModule, MatTableModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,9 @@ import { ItemDetailsComponent } from './orders/item-details/item-details.compone
     BrowserAnimationsModule,
     MatDialogModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatPaginatorModule,
+    MatTableModule
   ],
   entryComponents:[OrderItemComponent,ItemComponent],
   providers: [OrderService,CustomerService,OrderItemService,ItemService],

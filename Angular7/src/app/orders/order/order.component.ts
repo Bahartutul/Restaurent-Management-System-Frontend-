@@ -105,11 +105,11 @@ this.route.navigate(["/orders"]);
     return this.isValid;
   }
 
-  AddFoodItem(){
+  AddFoodItem(ItemIndex,ItemId){
     var Config=new MatDialogConfig();
     Config.autoFocus=true;
     Config.disableClose=true;
-    Config.data=null;
+    Config.data={ItemIndex,ItemId};
     this.dialog.open(ItemComponent,Config);
   }
 }

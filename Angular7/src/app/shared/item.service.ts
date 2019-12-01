@@ -27,4 +27,10 @@ orderItems:OrderItem[];
     }
     return this.http.post(environment.apiUrl+"/Items",this.formData);
   }
+  getRow(itemId:number){
+   return this.http.get(environment.apiUrl+"/Items/"+itemId);
+  }
+  removeItem(id:number){
+    return this.http.delete(environment.apiUrl+"/Items/"+id);
+  }
 }

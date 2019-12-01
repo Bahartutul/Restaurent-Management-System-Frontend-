@@ -5,6 +5,7 @@ import { ItemService } from 'src/app/shared/item.service';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import { IfStmt } from '@angular/compiler';
+import { Item } from 'src/app/shared/item.model';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { IfStmt } from '@angular/compiler';
 })
 export class ItemComponent implements OnInit {
 isValid:boolean=true;
+itemId:number;
+result:Item[];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogref:MatDialogRef<ItemComponent>,
@@ -24,7 +27,14 @@ isValid:boolean=true;
   ) { }
 
   ngOnInit() {
-    this.reset();
+    
+    if(this.data.ItemId==null){
+      this.reset();
+    }
+    else{
+      this.itemId=this.data.ItemId;
+      this.editItem();
+    }
 
   }
  reset(form?:NgForm){
@@ -38,13 +48,26 @@ this.service.formData={
 };
  }
   AddItem(form?:NgForm){
+    console.log(this.service.formData.ItemId);
+    if(this.service.formData.ItemId==null){
     if(this.Validation()){
     this.service.PostItem().subscribe(res=>{
       this.reset();
       this.tstr.success("Item Added Successfully","Rastaurent Mgt.");
       this.dialogref.close();
-    })
+    })}
+   
   
+  }
+  else{
+    if(this.Validation()){
+      this.service.PostItem().subscribe(res=>{
+        this.reset();
+        this.tstr.success("Item Update Successfully","Rastaurent Mgt.");
+        this.dialogref.close();
+        
+        
+      })}
   }
 }
 
@@ -58,5 +81,10 @@ this.service.formData={
 
     }
     return this.isValid;
+  }
+  editItem(){
+    this.service.getRow(this.itemId).subscribe(res=>{
+      this.service.formData=res as Item
+    });
   }
 }
