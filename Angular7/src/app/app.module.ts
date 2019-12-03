@@ -22,6 +22,10 @@ import { ItemDetailsComponent } from './orders/item-details/item-details.compone
 // import { MatPaginator, MatPaginatorModule, MatTableModule } from '@angular/material';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +33,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
     OrderComponent,
     OrderItemComponent,
     ItemComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    UserComponent,
+    LoginComponent,
+    RegistrationComponent,
+   
+    
   ],
   imports: [
     BrowserModule,
