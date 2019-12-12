@@ -25,6 +25,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { TitleComponent } from './DashBoardLayOut/title/title.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
     UserComponent,
     LoginComponent,
     RegistrationComponent,
+    TitleComponent,
    
     
   ],

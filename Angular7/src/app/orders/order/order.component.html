@@ -1,4 +1,4 @@
-
+<app-title></app-title>
 <form #form="ngForm" autocomplete="off" *ngIf="service.formData" (submit)="onSubmit(form)">
   <input type="hidden" name="OrderId" #OrderId="ngModel" [(ngModel)]="service.formData.OrderId">
   <div class="row">
