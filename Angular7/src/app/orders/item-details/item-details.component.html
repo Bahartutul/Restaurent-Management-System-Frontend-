@@ -1,4 +1,9 @@
-<table class="table table-border col-md-8 offset-md-2 text-center">
+<app-title></app-title>
+<div>
+        <input type="text" [(ngModel)]="term" placeholder="Search..." class="form-control col-md-3 offset-md-9">
+</div>
+<br>
+<table class="table table-hover col-md-8  text-center">
 <thead>
     <tr>
         <th>Food Name</th>
@@ -7,43 +12,23 @@
     </tr>
 
 </thead>
+
+
 <tbody>
-    <tr *ngFor="let a of result; let i=index">
+        
+    <tr *ngFor="let a of result |paginate: { itemsPerPage: 3, currentPage: p }| filter:term; let i=index ">
      <td>{{a.Name}}</td>
      <td>{{a.Price}}</td>
      <td>              <button type="button" class="btn btn-info" (click)="AddOrEditItem(i,a.ItemId)"><i class="fa fa-pencil"></i></button>
         <button type="button" class="btn btn-danger ml-1" (click)="deleteItem(a.ItemId)"><i class="fa fa-trash"></i></button></td>
     </tr>
-    <tr>
-        <td colspan="3"><button type="button" routerLink="/order" class="btn btn-dark ">Back</button></td>
+    <!-- <tr>
+        <td colspan="3"></td>
 
-</tr>
+</tr> -->
 </tbody>
 </table>
-
-
- <!-- <div class="mat-elevation-z8">
-     <mat-table [dataSource]="datasource">
-            <ng-container matColumnDef="Name">
-                    <th mat-header-cell *matHeaderCellDef> Name </th>
-                    <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
-                  </ng-container>
-                
-                  
-                  <ng-container matColumnDef="Price">
-                    <th mat-header-cell *matHeaderCellDef> Price </th>
-                    <td mat-cell *matCellDef="let element"> {{element.Price}} </td>
-                  </ng-container>
-                
-               
-                  <ng-container matColumnDef="Action">
-                    <th mat-header-cell *matHeaderCellDef> Action </th>
-                    <td>              <button type="button" class="btn btn-info" (click)="AddOrEditItem(i,a.ItemId)"><i class="fa fa-pencil"></i></button>
-                        <button type="button" class="btn btn-danger ml-1" (click)="deleteItem(a.ItemId)"><i class="fa fa-trash"></i></button></td>
-                  </ng-container>
-         <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
-         <mat-row *matRowDef="let row;columns:displayedColumn"></mat-row>
-     </mat-table>
-     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
- </div> -->
+<div class="form-group">
+<button type="button" routerLink="/order" class="btn btn-dark ">Back</button>
+<pagination-controls (pageChange)="p = $event" style="display: inline-block;" class="offset-md-8"></pagination-controls>
+</div>
