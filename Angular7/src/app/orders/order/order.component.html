@@ -39,7 +39,7 @@
                   <div class="input-group-text">#</div>
                 </div>
                 <select  name="PmMethod" #PmMethod="ngModel" [(ngModel)]="service.formData.PmMethod" class="form-control"
-                [class.is-invalid]="!isValid && service.formData.pmMethod==''">
+                [class.is-invalid]="!isValid && service.formData.PmMethod==''">
                     <option value="">--Select PayMethod--</option>
                     <option value="Cash">Cash</option>
                     <option value="Card">Card</option>
