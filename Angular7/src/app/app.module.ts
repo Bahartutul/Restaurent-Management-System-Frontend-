@@ -26,6 +26,7 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { TitleComponent } from './DashBoardLayOut/title/title.component';
+import { LoginService } from './shared/login.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { TitleComponent } from './DashBoardLayOut/title/title.component';
     NgxPaginationModule
   ],
   entryComponents:[OrderItemComponent,ItemComponent],
-  providers: [OrderService,CustomerService,OrderItemService,ItemService],
+  providers: [OrderService,CustomerService,OrderItemService,ItemService,LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

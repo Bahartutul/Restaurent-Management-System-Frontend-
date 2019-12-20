@@ -31,7 +31,7 @@
 				
 			</div>
 			<div class="card-body">
-				<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+				<form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-user"></i></span>
@@ -49,7 +49,7 @@
 						<input type="checkbox">Remember Me
 					</div>
 					<div class="form-group">
-						<button type="submit"  class="btn float-right login_btn" [disabled]="form.invalid">Login</button>
+						<input type="submit"  class="btn float-right login_btn" [disabled]="form.invalid" value="Login">
 
 					</div>
 				</form>
@@ -67,3 +67,6 @@
 </div>
 </body>
 </html>
+<div class="form-group">  
+	<div class="col-md-12 alert alert-success" *ngIf="successmsg">{{successmsg}}</div>  
+</div>  
