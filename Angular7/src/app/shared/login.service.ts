@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private http:HttpClient) { }
 
   postData(data):any{
-    console.log("---"+data.UserName);
+  
     const body=new HttpParams()
     .set('UserName',data.UserName)
     .set('Password',data.Password)

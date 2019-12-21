@@ -32,6 +32,12 @@ export class LoginComponent implements OnInit {
           }else{
             alert("UserName Password wrong");
           }
+        
+          },
+          err=>{
+            if(err.status===400|| err.status===401 || err.status===500){
+              alert("UserName Password Wrong");
+            }
     })
     
   }
