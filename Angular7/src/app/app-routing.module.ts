@@ -8,6 +8,8 @@ import { ItemDetailsComponent } from './orders/item-details/item-details.compone
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { UserComponent } from './user/user.component';
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthGaurdService } from './gaurd/auth-gaurd.service';
 
 const routes: Routes = [
   // {path:'',redirectTo:'order' ,pathMatch:'full'},
@@ -21,18 +23,28 @@ const routes: Routes = [
   // ]},
   { path: 'orders', component: OrdersComponent },
   { path:'order', children:[
-     {path:'',component:OrderComponent},
-     {path:'edit/:id', component:OrderComponent}
+     {path:'',component:OrderComponent,canActivate:[AuthGaurdService]},
+     {path:'edit/:id', component:OrderComponent,canActivate:[AuthGaurdService]}
   ]},
   {path:'item', component:ItemComponent},
   {path:'itemDeatails', component:ItemDetailsComponent}
  
 
 ];
+export function tokenGetter(){
+  return localStorage.getItem("access_token");
+}
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    JwtModule.forRoot({
+      config:{
+        tokenGetter:tokenGetter,
+        whitelistedDomains:["localhost:4000"],
+        blacklistedRoutes:[]
+      }
+    })
   ],
   exports:[
 RouterModule

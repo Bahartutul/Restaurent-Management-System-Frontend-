@@ -27,7 +27,9 @@ import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { TitleComponent } from './DashBoardLayOut/title/title.component';
 import { LoginService } from './shared/login.service';
-
+export function tokenGetter(){
+  return localStorage.getItem("access_token");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +57,8 @@ import { LoginService } from './shared/login.service';
     // MatPaginatorModule,
     // MatTableModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    
   ],
   entryComponents:[OrderItemComponent,ItemComponent],
   providers: [OrderService,CustomerService,OrderItemService,ItemService,LoginService],
