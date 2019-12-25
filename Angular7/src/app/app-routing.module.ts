@@ -27,7 +27,8 @@ const routes: Routes = [
      {path:'edit/:id', component:OrderComponent,canActivate:[AuthGaurdService]}
   ]},
   {path:'item', component:ItemComponent},
-  {path:'itemDeatails', component:ItemDetailsComponent}
+  {path:'itemDeatails', component:ItemDetailsComponent},
+  {path:'registration', component:RegistrationComponent}
  
 
 ];

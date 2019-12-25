@@ -1,1 +1,39 @@
-<p>registration works!</p>
+<div class="container register-form">
+    <div class="form">
+        <div class="note">
+            <p>Employee Registration</p>
+        </div>
+
+        <form class="form-content" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="UserName" #UserName="ngModel" [(ngModel)]="formdata.UserName" class="form-control" placeholder="Your Name *" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="UserPhone" #UserPhone="ngModel" [(ngModel)]="formdata.UserPhone" placeholder="Phone Number *" value=""/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="UserEmail" #UserEmail="ngModel" [(ngModel)]="formdata.UserEmail" placeholder="Your Email *" value=""/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="UserPassword" #UserPassword="ngModel" [(ngModel)]="formdata.UserPassword" placeholder="Your Password *" value=""/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Confirm Password *" value=""/>
+                    </div>
+                   
+                    <div class="form-group">
+                        <select class="form-control" name="UserRole" #UserRole="ngModel" [(ngModel)]="formdata.UserRole">
+                            <option value="">--Select Employee Role--</option>
+                        </select>
+                    </div>
+                </div>
+              
+            </div>
+            <input type="submit" class="btnSubmit" value="Submit">
+        </form>
+    </div>
+</div>

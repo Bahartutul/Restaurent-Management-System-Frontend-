@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/shared/login.model';
 import { LoginService } from 'src/app/shared/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
      UserName:'',
      Password:''
    }
-  constructor(private route:Router,private loginService:LoginService) { }
+  constructor(private route:Router,private loginService:LoginService,private toastr:ToastrService) { }
 
   ngOnInit() {
     
@@ -30,13 +31,13 @@ export class LoginComponent implements OnInit {
             this.successmsg = 'token - ' + res.body.access_token;
           localStorage.setItem('access_token',res.body.access_token);
           }else{
-            alert("UserName Password wrong");
+            this.toastr.warning("UserName Password wrong","Restaurent Mgt.");
           }
         
           },
           err=>{
             if(err.status===400|| err.status===401 || err.status===500){
-              alert("UserName Password Wrong");
+              this.toastr.warning("UserName Password wrong","Restaurent Mgt.");
             }
     })
     
